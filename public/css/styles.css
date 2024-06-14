@@ -4,3 +4,65 @@
 *:after {
   box-sizing: border-box;
 }
+
+/*colors: https://coolors.co/f1e4e8-e2dcde-ceb1be-b97375-2d2d34 */
+
+h1,h2,h3,h4,h5,h6{
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+}
+
+body{
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Roboto Slab", serif;
+  font-weight: 300;
+}
+
+#top-header{
+  display: grid;
+  grid-template-columns: 1fr .5fr;
+  font-size: 1.2rem;
+}
+#top-header a{
+  color: #2D2D34;
+  text-decoration: none;
+}
+.siteName{
+  font-size: 2rem;
+  font-weight: 600;
+  width: 200px;
+}
+#wrapper{
+  background-color: #fff;
+  padding: 1rem;
+}
+nav ul{
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+}
+nav ul li{
+  flex: 1 1 100%;
+}
+nav ul li a{
+  display: block;
+  padding: 1rem;
+  background-color: #2D2D34;
+  color: #E2DCDE;
+  text-decoration: none;
+}
+nav ul li a:hover{
+  background-color: #E2DCDE; 
+  color: #2D2D34;
+}
+
+@media screen and (min-width: 500px) {
+  body{
+    background-image: url("/images/site/checkerboard.jpg");
+    background-repeat: repeat;
+  }
+}
