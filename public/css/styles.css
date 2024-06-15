@@ -68,6 +68,8 @@ nav ul li a:hover{
 
 .hero img{
   max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .call-action{
@@ -82,11 +84,11 @@ nav ul li a:hover{
 }
 .call-action h2{
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 .call-action p{
-  margin-block: .1rem;
-  font-size: 1rem;
+  margin-block: .3rem;
+  font-size: 1.2rem;
 }
 .call-action button{
   background-color: #B97375;
@@ -97,6 +99,7 @@ nav ul li a:hover{
 .about{
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 }
 .upgrades-container{
   width: 350px;
@@ -138,6 +141,19 @@ nav ul li a:hover{
   body{
     background-image: url("/images/site/checkerboard.jpg");
     background-repeat: repeat;
+  }
+  #wrapper{
+    border: 5px solid #B97375;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+  .hero{
+    display: flex;
+  }
+  .hero img{
+    height: auto;
+    margin: 0 auto;
+    width: 80%;
   }
   .about{
     display: grid;
