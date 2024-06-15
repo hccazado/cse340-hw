@@ -44,13 +44,15 @@ nav ul{
   list-style-type: none;
   margin-inline-start: 0;
   padding-inline-start: 0;
+  max-width: 100%;
 }
 nav ul li{
   flex: 1 1 100%;
 }
 nav ul li a{
   display: block;
-  padding: 1rem;
+  font-weight: 400;
+  padding: .5rem;
   background-color: #2D2D34;
   color: #E2DCDE;
   text-decoration: none;
@@ -60,9 +62,92 @@ nav ul li a:hover{
   color: #2D2D34;
 }
 
+.hero{
+  position: relative;
+}
+
+.hero img{
+  max-width: 100%;
+}
+
+.call-action{
+  background-color: rgba(226, 220, 222, 0.7);
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  /* height: 400px; */
+  width: 250px;
+  padding: 1rem;
+  font-weight: 500;
+}
+.call-action h2{
+  margin: 0;
+  font-size: 1.2rem;
+}
+.call-action p{
+  margin-block: .1rem;
+  font-size: 1rem;
+}
+.call-action button{
+  background-color: #B97375;
+  border: none;
+  padding: .5rem;
+  font-weight: 600;
+}
+.about{
+  display: flex;
+  flex-direction: column;
+}
+.upgrades-container{
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  margin: 2rem auto;
+}
+.upgrades-container a{
+  width: 48%;
+  height: 110px;
+  display: block;
+  text-align: center;
+  border: 2px solid #B97375;
+  padding: .2rem;
+  font-weight: 400;
+}
+.upgrades-container p{
+  margin-top: .5rem;
+}
+.upgrades-container img{
+  height: 65px;
+  width: auto;
+}
+.upgrades-container p{
+  margin-inline-end: 0;
+}
+.reviews ul{
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  justify-content: space-around;
+  font-weight: 400;
+}
+
 @media screen and (min-width: 500px) {
   body{
     background-image: url("/images/site/checkerboard.jpg");
     background-repeat: repeat;
+  }
+  .about{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .upgrades-container a{
+    width: 150px;
+    height: 120px;
+  }
+  .upgrades-container{
+    flex-direction: row;
   }
 }
