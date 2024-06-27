@@ -217,6 +217,7 @@ nav ul li a:hover{
   }
   #inv-display{
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
   }
   #inv-display li{
