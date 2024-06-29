@@ -29,10 +29,10 @@ Util.buildClassificationGrid = async function(data){
             grid += `
                 <li>
                     <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model}"> 
-                        <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" />
+                        <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors">
                     </a>
                     <div class="namePrice">
-                        <hr/>
+                        <hr>
                         <h2>
                             <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
                                 ${vehicle.inv_make} ${vehicle.inv_model}
@@ -48,6 +48,30 @@ Util.buildClassificationGrid = async function(data){
         grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
     }
     return grid;
+}
+
+/* **************************************
+* Build the inventory's detail view
+* ************************************ */
+Util.buildInventoryDetails = async function(data){
+    if (data != null || data != undefined){
+        let htmlContent = `
+        <div class="inv-detail">
+            <div>
+                <img class="inv-detail-img" src=${data.inv_image} alt="Image of ${data.inv_make} ${data.inv_model} - ${data.inv_year} on CSE Motors inventory" width=300 height=300>
+            </div>
+            <div class="inv-detail-desc">
+                <h2>${data.inv_year} ${data.inv_make} ${data.inv_model} Details</h2>
+                <p><strong>Price: ${new Intl.NumberFormat("en-US", {style:"currency", currency:"USD"}).format(data.inv_price)}</strong></p>
+                <p><Strong>Description: </strong>${data.inv_description}</p>
+                <p><strong>Color:</strong> ${data.inv_color}</p>
+                <p><strong>Miles:</strong> ${new Intl.NumberFormat("en-US").format(data.inv_miles)}</p>
+            </div>
+        </div>`
+        return htmlContent;
+    }else{
+        return '<p class="notice">Sorry, it seems that we could not find the selected inventory!</h2>';
+    }
 }
 
 /* ****************************************

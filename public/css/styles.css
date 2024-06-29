@@ -186,6 +186,26 @@ nav ul li a:hover{
   margin-right: .5rem;
 }
 
+.inv-detail{
+  display: flex;
+  flex-direction: column;
+}
+
+.inv-detail-img-container{
+  width: 100%;
+  height: auto;
+}
+.inv-detail-img{
+  width: 100%;
+  height: auto;
+}
+.inv-detail-desc p{
+  padding: .5rem;
+}
+.inv-detail-desc p:nth-child(odd){
+  background-color: rgba(185, 115, 117, .1);
+}
+
 @media screen and (min-width: 500px) {
   body{
     background-image: url("/images/site/checkerboard.jpg");
@@ -229,6 +249,18 @@ nav ul li a:hover{
     border-top-right-radius: 1rem;
     width: 100%;
     height: 170px;
-    object-fit: cover;
+    object-fit: contain;
+  }
+  .inv-detail{
+    flex-direction: row;
+    align-items: start;
+    gap: 1rem;
+  }
+  .inv-detail-img{
+    width: 400px;
+    height: auto;
+  }
+  .inv-detail-desc h2{
+    margin-top: 0;
   }
 }
