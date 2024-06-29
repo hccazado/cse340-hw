@@ -31,7 +31,7 @@ async function getInventoryDetailsById(inventory_id){
             FROM public.inventory
             WHERE inv_id = $1`, [inventory_id]
         );
-        return data.rows[0];
+        return data.rows;
     }catch(error){
         console.error("getInventoryDetailsById error: "+ error);
     }

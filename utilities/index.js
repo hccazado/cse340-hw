@@ -54,18 +54,18 @@ Util.buildClassificationGrid = async function(data){
 * Build the inventory's detail view
 * ************************************ */
 Util.buildInventoryDetails = async function(data){
-    if (data != null || data != undefined){
+    if (data.length > 0){
         let htmlContent = `
         <div class="inv-detail">
             <div>
-                <img class="inv-detail-img" src=${data.inv_image} alt="Image of ${data.inv_make} ${data.inv_model} - ${data.inv_year} on CSE Motors inventory" width=300 height=300>
+                <img class="inv-detail-img" src=${data[0].inv_image} alt="Image of ${data[0].inv_year} ${data[0].inv_make} ${data[0].inv_model} on CSE Motors inventory" width=300 height=300>
             </div>
             <div class="inv-detail-desc">
-                <h2>${data.inv_year} ${data.inv_make} ${data.inv_model} Details</h2>
-                <p><strong>Price: ${new Intl.NumberFormat("en-US", {style:"currency", currency:"USD"}).format(data.inv_price)}</strong></p>
-                <p><Strong>Description: </strong>${data.inv_description}</p>
-                <p><strong>Color:</strong> ${data.inv_color}</p>
-                <p><strong>Miles:</strong> ${new Intl.NumberFormat("en-US").format(data.inv_miles)}</p>
+                <h2>${data[0].inv_year} ${data[0].inv_make} ${data[0].inv_model} Details</h2>
+                <p><strong>Price: ${new Intl.NumberFormat("en-US", {style:"currency", currency:"USD"}).format(data[0].inv_price)}</strong></p>
+                <p><Strong>Description: </strong>${data[0].inv_description}</p>
+                <p><strong>Color:</strong> ${data[0].inv_color}</p>
+                <p><strong>Miles:</strong> ${new Intl.NumberFormat("en-US").format(data[0].inv_miles)}</p>
             </div>
         </div>`
         return htmlContent;
