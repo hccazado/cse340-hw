@@ -30,7 +30,10 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome));
 
 //Inventory routes
-app.use("/inv", inventoryRoute)
+app.use("/inv", utilities.handleErrors(inventoryRoute));
+
+//Throw an error
+app.use("/boom", utilities.handleErrors(baseController.buildError));
 
 app.use(async (req, res, next)=>{
   next({status: 404, message: "Sorry, we appear to have lost that page."});
