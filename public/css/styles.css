@@ -208,6 +208,7 @@ nav ul li a:hover{
 
 .login{
   width: 400px;
+  max-width: 100%;
   background-color: rgba(226, 220, 222, 0.7);
   padding: .5rem;
   margin: 2rem auto;
@@ -244,8 +245,7 @@ nav ul li a:hover{
   color: #fff;
 }
 .login p{
-  text-align: right;
-  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 @media screen and (min-width: 500px) {

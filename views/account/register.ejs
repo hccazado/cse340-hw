@@ -1,0 +1,27 @@
+<!--Displaying providioned title or redirecting response to default index route-->
+<%if (title) {%>
+    <h1><%=title%></h1>
+<%} else{
+    res.redirect('/')
+}%>
+
+<!--Displaying messages in the view-->
+<%- messages() %>
+
+<!--Login Form-->
+<form class="login" action="account/register" method="POST">
+        <label for="account_firstname">First name:*</label>
+        <input  type="text" id="account_firstname" name="account_firstname" required title="Type your first name" placeholder="John">
+        
+        <label for="account_lastname">Last name:*</label>
+        <input  type="text" id="account_lastname" name="account_lastname" required title="Type your last name" placeholder="Doe">
+        
+        <label for="account_email">Email:*</label>
+        <input type="email" id="account_email" name="account_email" required title="provide a valid email address" placeholder="john@mail.com" >
+        
+        <label for="account_password">Password:*</label>
+        <input  type="password" id="account_password" name="account_password" required title="Type a valid password" minlength="12">
+
+        <p>*All fields are required for registration. Password must have at least 12 characters, contains 1 capital letter, at least 1 number, at least 1 special character.</p>
+        <button type="submit">Register</button>
+</form>

@@ -14,4 +14,17 @@ accountController.buildLogin = async function (req, res, next){
     });
 }
 
+/* ****************************************
+*  Deliver registration view
+* *************************************** */
+accountController.buildRegistration = async function(req, res, next){
+    const title = "Register";
+    let nav = await utilities.getNav();
+    res.render("./account/register",{
+        title: title,
+        nav,
+        errors: null
+    });
+}
+
 module.exports = accountController;
