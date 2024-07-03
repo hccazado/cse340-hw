@@ -9,19 +9,22 @@
 <%- messages() %>
 
 <!--Login Form-->
-<form class="login" action="account/register" method="POST">
+<form class="login" action="/account/register" method="post">
+        <p>*All fields are required for registration.</p>
         <label for="account_firstname">First name:*</label>
-        <input  type="text" id="account_firstname" name="account_firstname" required title="Type your first name" placeholder="John">
+        <input  type="text" id="account_firstname" name="account_firstname" required title="Type your first name" placeholder="Your first name">
         
         <label for="account_lastname">Last name:*</label>
-        <input  type="text" id="account_lastname" name="account_lastname" required title="Type your last name" placeholder="Doe">
+        <input  type="text" id="account_lastname" name="account_lastname" required title="Type your last name" placeholder="Your last name">
         
         <label for="account_email">Email:*</label>
-        <input type="email" id="account_email" name="account_email" required title="provide a valid email address" placeholder="john@mail.com" >
+        <input type="email" id="account_email" name="account_email" required title="Enter a valid email address" placeholder="john@mail.com" >
         
         <label for="account_password">Password:*</label>
-        <input  type="password" id="account_password" name="account_password" required title="Type a valid password" minlength="12">
+        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+        <input  type="password" id="account_password" name="account_password" required title="Type a valid password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
 
-        <p>*All fields are required for registration. Password must have at least 12 characters, contains 1 capital letter, at least 1 number, at least 1 special character.</p>
+        <button id="btnPwd">Show Password</button>
         <button type="submit">Register</button>
 </form>
+<script src="/js/script.js"></script>
