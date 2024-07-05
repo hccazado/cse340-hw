@@ -209,9 +209,10 @@ nav ul li a:hover{
 .login{
   width: 400px;
   max-width: 100%;
-  background-color: rgba(226, 220, 222, 0.7);
+  background: linear-gradient(120deg, rgba(226, 220, 222, 0.8) 40%, rgba(226, 220, 222, 0.3) 100%);
   padding: .5rem;
   margin: 2rem auto;
+  border-radius: 2%;
 }
 .login input,
 .login label{
@@ -221,20 +222,23 @@ nav ul li a:hover{
 }
 .login input{
   height: 32px;
+  border: none;
+  padding: .3rem;
+  border-radius: .5rem;
+}
+.login input:click{
+  border-bottom: 1px solid #7D3F43;
 }
 .login fieldset{
   border: none;
 }
 .login label{
-  margin-top: .5rem;
+  margin-top: 1rem;
 }
 .login button{
   background-color: #C3888C;
   border: none;
-  border-top-right-radius: .5rem;
-  border-top-left-radius: .5rem;
-  border-bottom-left-radius: .5rem;
-  border-bottom-right-radius: .5rem;
+  border-radius: .5rem;
   font-size: 1rem;
   width: 95%;
   margin: 1rem 2.5%;
@@ -246,18 +250,15 @@ nav ul li a:hover{
 }
 .login p{
   margin-left: 1rem;
+  font-size: .8rem;
 }
 
 .login input:required:invalid, .login input:focus:invalid {
-  background-image: url(/images/invalid.png);
-  background-position: right top;
-  background-repeat: no-repeat;
+  border-bottom: 2px solid darkred;
  }
 
 .login input:required:valid {
-  background-image: url(/images/valid.png);
-  background-position: right top;
-  background-repeat: no-repeat; 
+  border-bottom: 2px solid darkgreen;
 }
   
 .login span{
@@ -265,6 +266,28 @@ nav ul li a:hover{
   margin: .3rem auto;
   display: block;
   width: 95%;
+}
+
+.notice, 
+.success{
+  list-style: none;
+  padding-inline-start: 0;
+}
+.notice li{
+  border: 1px solid #b11;
+  background-color: rgba(120, 10, 10, 0.1);
+  padding: .1rem;
+}
+
+.success li{
+  border: 1px solid #1b1;
+  background-color: rgba(10, 120, 10, 0.1);
+  padding: .1rem;
+}
+
+.notice li:not(:first-child),
+.success li:not(:first-child){
+  margin-top: .2rem;
 }
 @media screen and (min-width: 500px) {
   body{

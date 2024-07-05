@@ -21,13 +21,13 @@
 <form class="login" action="/account/register" method="post">
         <p>*All fields are required for registration.</p>
         <label for="account_firstname">First name:*</label>
-        <input  type="text" id="account_firstname" name="account_firstname" required title="Type your first name" placeholder="Your first name">
+        <input  type="text" id="account_firstname" name="account_firstname" required title="Type your first name" placeholder="Your first name" value="<%=locals.account_firstname%>">
         
         <label for="account_lastname">Last name:*</label>
-        <input  type="text" id="account_lastname" name="account_lastname" required title="Type your last name" placeholder="Your last name">
+        <input  type="text" id="account_lastname" name="account_lastname" required title="Type your last name" placeholder="Your last name" value="<%=locals.account_lastname%>">
         
         <label for="account_email">Email:*</label>
-        <input type="email" id="account_email" name="account_email" required title="Enter a valid email address" placeholder="john@mail.com" >
+        <input type="email" id="account_email" name="account_email" required title="Enter a valid email address" placeholder="john@mail.com" value="<%=locals.account_email%>">
         
         <label for="account_password">Password:*</label>
         <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
