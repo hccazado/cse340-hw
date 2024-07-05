@@ -18,7 +18,7 @@ accountController.buildLogin = async function (req, res, next){
 /* ****************************************
 *  Deliver registration view
 * *************************************** */
-accountController.buildRegistration = async function(req, res, next){
+accountController.buildRegister = async function(req, res, next){
     const title = "Registration";
     let nav = await utilities.getNav();
     res.render("./account/register",{

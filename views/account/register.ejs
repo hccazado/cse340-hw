@@ -8,6 +8,15 @@
 <!--Displaying messages in the view-->
 <%- messages() %>
 
+<!--Displaying errors if any-->
+<% if (errors){%>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<%}%>
+
 <!--Login Form-->
 <form class="login" action="/account/register" method="post">
         <p>*All fields are required for registration.</p>
