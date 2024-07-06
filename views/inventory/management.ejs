@@ -1,0 +1,13 @@
+<!--Displaying providioned title or redirecting response to default index route-->
+<%if (title) {%>
+    <h1><%=title%></h1>
+<%} else{
+    res.redirect('/')
+}%>
+
+<!--Displaying messages (flash) in the view-->
+<%- messages() %>
+
+<a href ="/inv/newclassification"><p>Add New Classification</p></a>
+
+<a href="/inv/newvehicle"><p>Add New Vehicle</p></a>

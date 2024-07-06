@@ -206,7 +206,7 @@ nav ul li a:hover{
   background-color: rgba(185, 115, 117, .1);
 }
 
-.login{
+form{
   width: 400px;
   max-width: 100%;
   background: linear-gradient(120deg, rgba(226, 220, 222, 0.8) 40%, rgba(226, 220, 222, 0.3) 100%);
@@ -214,28 +214,35 @@ nav ul li a:hover{
   margin: 2rem auto;
   border-radius: 2%;
 }
-.login input,
-.login label{
+form input,
+form label,
+form textarea,
+form select{
   display: block;
   width: 95%;
   margin: .5rem auto;
 }
-.login input{
+form input,
+form textarea,
+form select{
   height: 32px;
   border: none;
   padding: .3rem;
   border-radius: .5rem;
 }
-.login input:click{
-  border-bottom: 1px solid #7D3F43;
+form textarea{
+  height: 3.5rem;
 }
-.login fieldset{
+form input:focus{
+  border: 1px solid #ccc;
+}
+form fieldset{
   border: none;
 }
-.login label{
-  margin-top: 1rem;
+form label{
+  margin-top: 1.2rem;
 }
-.login button{
+form button{
   background-color: #C3888C;
   border: none;
   border-radius: .5rem;
@@ -244,24 +251,24 @@ nav ul li a:hover{
   margin: 1rem 2.5%;
   padding: .6rem;
 }
-.login button:hover{
+form button:hover{
   background-color: #7D3F43;
   color: #fff;
 }
-.login p{
+form p{
   margin-left: 1rem;
   font-size: .8rem;
 }
 
-.login input:required:invalid, .login input:focus:invalid {
+form input:required:invalid, form input:focus:invalid {
   border-bottom: 2px solid darkred;
  }
 
-.login input:required:valid {
+form input:required:valid {
   border-bottom: 2px solid darkgreen;
 }
   
-.login span{
+form span{
   font-size: .8rem;
   margin: .3rem auto;
   display: block;
