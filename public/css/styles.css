@@ -41,6 +41,7 @@ body{
 nav ul{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   list-style-type: none;
   margin-inline-start: 0;
   padding-inline-start: 0;
@@ -305,6 +306,9 @@ form span{
     border: 5px solid #B97375;
     border-radius: 8px;
     margin: 1rem 0;
+  }
+  nav ul{
+    flex-wrap: nowrap;
   }
   .hero{
     display: flex;
