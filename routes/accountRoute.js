@@ -5,14 +5,14 @@ const accountController = require("../controllers/accountController");
 const utilities = require("../utilities/");
 const accountValidate = require("../utilities/account-validations");
 
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement));
+
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
 router.post("/login", 
     accountValidate.loginRules(),
     accountValidate.checkLoginData,
-    (req, res)=>{
-        res.status(200).send("login process");
-});
+    utilities.handleErrors(accountController.accountLogin));
 
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
