@@ -40,11 +40,17 @@ router.get("/getinventory/:classification_id", utilities.handleErrors(invControl
 //Route to get the edit view of an inventory item
 router.get("/edit/:inventory_id", utilities.handleErrors(invController.buildEditInventory));
 
-//ROute to update the edited inventory item
+//Route to update the edited inventory item
 router.post("/update/", 
     inventoryValidate.vehicleRules(),
     inventoryValidate.checkVehicleUpdateData,
     utilities.handleErrors(invController.updateInventory));
+
+//Route to display confirmation before deleting of an inventory item
+router.get("/delete/:inventory_id", utilities.handleErrors(invController.buildDeleteInventory));
+
+//Route to delete an inventory item
+router.post("/delete", utilities.handleErrors(invController.deleteInventory))
 
 
 module.exports = router;
