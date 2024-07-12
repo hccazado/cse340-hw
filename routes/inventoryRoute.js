@@ -34,4 +34,17 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 //Route to display inventory item details
 router.get("/detail/:vehicleId", invController.buildDetailsByInventoryId);
 
+//Route to return inventory list based on id_classification
+router.get("/getinventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+
+//Route to get the edit view of an inventory item
+router.get("/edit/:inventory_id", utilities.handleErrors(invController.buildEditInventory));
+
+//ROute to update the edited inventory item
+router.post("/update/", 
+    inventoryValidate.vehicleRules(),
+    inventoryValidate.checkVehicleUpdateData,
+    utilities.handleErrors(invController.updateInventory));
+
+
 module.exports = router;
