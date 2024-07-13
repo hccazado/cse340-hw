@@ -7,7 +7,19 @@ const accountValidate = require("../utilities/account-validations");
 
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement));
 
+router.post("/update",
+    accountValidate.updateAccountRules(),
+    accountValidate.checkAccountUpdateData,
+    utilities.handleErrors(accountController.updateAccount));
+
+router.post("/updatePassword",
+    accountValidate.updatePasswordRules(),
+    accountValidate.checkUpdatePassword,
+    utilities.handleErrors(accountController.updatePassword));   
+
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
+
+router.get("/logout", utilities.handleErrors(accountController.logout));
 
 router.post("/login", 
     accountValidate.loginRules(),

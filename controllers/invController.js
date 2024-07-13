@@ -12,9 +12,11 @@ invCont.buildByClassificationId = async function (req, res, next){
     if(data.length > 0){
         const grid = await utilities.buildClassificationGrid(data);
         let nav = await utilities.getNav();
+        let tools = utilities.getTools(req);
         const className = data[0].classification_name;
         res.render("./inventory/classification", {
             title: `${className} vehicles`,
+            tools,
             nav,
             grid
         });
@@ -33,9 +35,11 @@ invCont.buildDetailsByInventoryId = async function (req, res, next){
     if(data.length > 0){
         const inventoryDetail = await utilities.buildInventoryDetails(data);
         let nav = await utilities.getNav();
+        let tools = utilities.getTools(req);
         const invTitle = `${data[0].inv_make} ${data[0].inv_model}`;
         res.render("./inventory/detail", {
             title: invTitle,
+            tools,
             nav,
             inventoryDetail
         });
@@ -50,9 +54,11 @@ invCont.buildDetailsByInventoryId = async function (req, res, next){
  * ************************** */
 invCont.buildManagementView = async (req, res, next)=>{
     let nav = await utilities.getNav();
+    let tools = utilities.getTools(req);
     let classificationSelect = await utilities.buildClassificationList();
     res.render("./inventory/management",{
         nav,
+        tools,
         classificationSelect,
         title: "Inventory Management"
     });
@@ -63,8 +69,10 @@ invCont.buildManagementView = async (req, res, next)=>{
  * ************************** */
 invCont.buildNewClassificationView = async (req, res, next)=>{
     let nav = await utilities.getNav();
+    let tools = utilities.getTools(req);
     res.render("./inventory/newClassification",{
         nav,
+        tools,
         title: "Add New Classification",
         errors: null
     });
@@ -75,9 +83,11 @@ invCont.buildNewClassificationView = async (req, res, next)=>{
  * ************************** */
 invCont.buildAddNewVehicleView = async (req, res, next)=>{
     let nav = await utilities.getNav();
+    let tools = utilities.getTools(req);
     let classificationList = await utilities.buildClassificationList();
     res.render("./inventory/newVehicle",{
         nav,
+        tools,
         title: "Add New Vehicle",
         classificationList,
         errors: null
@@ -94,18 +104,22 @@ invCont.addNewClassification = async (req, res, next)=>{
 
     if (modelResult){
         let nav = await utilities.getNav();
+        let tools = utilities.getTools(req);
         req.flash("success", `Classification ${classification_name} was successfully added.`);
         res.status(201).render("inventory/management",{
             nav,
+            tools,
             title: "Inventory Management",
             errors: null
         });
     }
     else{
         let nav = await utilities.getNav();
+        let tools = utilities.getTools(req);
         req.flash("notice",`Sorry, something went wrong adding ${classification_name}.`)
         res.status(501).render("inventory/newClassification",{
             nav,
+            tools,
             title: "Add New Classification",
             errors: null,
             classification_name
@@ -118,23 +132,26 @@ invCont.addNewClassification = async (req, res, next)=>{
  * ************************** */
 invCont.addNewVehicle = async (req, res, next)=>{
     const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id} = req.body;
-    console.log(classification_id)
     const modelResult = await invModel.addVehicle(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
 
     if (modelResult){
         let nav = await utilities.getNav();
+        let tools = utilities.getTools(req);
         req.flash("success", `Vehicle ${inv_model} was successfully added.`);
         res.status(201).render("inventory/management",{
             nav,
+            tools,
             title: "Inventory Management",
         });
     }
     else{
         let nav = await utilities.getNav();
+        let tools = utilities.getTools(req);
         let classificationList = await utilities.buildClassificationList(classification_id);
         req.flash("notice",`Sorry, something went wrong adding ${inv_model}.`)
         res.status(501).render("inventory/newVehicle",{
             nav,
+            tools,
             title: "Add New Vehicle",
             errors: null,
             inv_make, 
@@ -171,12 +188,14 @@ invCont.getInventoryJSON = async (req, res, next) =>{
 invCont.buildEditInventory = async (req, res, next) =>{
     const inventory_id = req.params.inventory_id;
     let nav = await utilities.getNav();
+    let tools = utilities.getTools(req);
     const itemData = await invModel.getInventoryDetailsById(inventory_id);
     const classificationSelect = await utilities.buildClassificationList(itemData[0].classification_id);
     const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`;
     res.render("./inventory/editInventory",{
         title: "Edit "+itemName,
         nav,
+        tools,
         errors: null,
         classificationList: classificationSelect,
         inv_id: itemData[0].inv_id,
@@ -206,10 +225,12 @@ invCont.updateInventory = async (req, res, next) =>{
     }
     else{
         let nav = await utilities.getNav();
+        let tools = utilities.getTools(req);
         let classificationList = await utilities.buildClassificationList(classification_id);
         req.flash("notice",`Sorry, something went wrong updating ${inv_model}.`)
         res.status(501).render("inventory/editInventory",{
             nav,
+            tools,
             title: `Edit Vehicle ${inv_make} ${inv_model}`,
             errors: null,
             inv_id,
@@ -233,11 +254,13 @@ invCont.updateInventory = async (req, res, next) =>{
 invCont.buildDeleteInventory = async (req, res, next) =>{
     const inventory_id = req.params.inventory_id;
     let nav = await utilities.getNav();
+    let tools = utilities.getTools(req);
     const itemData = await invModel.getInventoryDetailsById(inventory_id);
     const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`;
     res.render("./inventory/deleteInventory",{
         title: "Delete "+itemName,
         nav,
+        tools,
         errors: null,
         inv_id: itemData[0].inv_id,
         inv_make: itemData[0].inv_make,
@@ -255,16 +278,17 @@ invCont.deleteInventory = async (req, res, next) =>{
     const modelResult = await invModel.deleteVehicle(inv_id);
 
     if (modelResult){
-        let nav = await utilities.getNav();
         req.flash("success", `Vehicle ${inv_model} was successfully deleted.`);
         res.redirect("/inv/");
     }
     else{
         let nav = await utilities.getNav();
+        let tools = utilities.getTools(req);
         const itemName = inv
         req.flash("notice",`Sorry, something went wrong deleting ${inv_model}.`)
         res.status(501).render("inventory/deleteInventory",{
             nav,
+            tools,
             title: `Delete ${itemName}`,
             errors: null,
             inv_id,
