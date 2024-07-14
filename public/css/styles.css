@@ -312,6 +312,13 @@ form span{
 .success li:not(:first-child){
   margin-top: .2rem;
 }
+
+#inventoryDisplay{
+  margin-top: 1rem;
+}
+#inventoryDisplay tbody tr:nth-child(odd){
+  background-color: #ddd;
+}
 @media screen and (min-width: 500px) {
   body{
     background-image: url("/images/site/checkerboard.jpg");
