@@ -16,7 +16,6 @@ async function fetchInventoryData(classification_id){
     let url = "/inv/getInventory/"+classification_id;
     let response = await fetch(url);
     if (response.ok){
-        //return await response.json();
         buildInventoryList(await response.json());
     }
     else{
@@ -39,7 +38,6 @@ async function fetchClassificationData(){
 function opentab(tabName){
     const tabsList = document.querySelectorAll(".tabcontent");
     tabsList.forEach(tab =>{
-        console.log(tab);
         tab.style.display = "none";
         tab.classList.remove("active");
     });
@@ -72,6 +70,9 @@ async function updateVisibility(id, isvisible, target){
         },
         body: body
     });
+
+    document.alert("Please wait, updating visibility!");
+
     if (response.ok && target == "inventory"){
         
         const message = await response.text();
@@ -90,10 +91,13 @@ async function updateVisibility(id, isvisible, target){
 
         jsOutput.appendChild(divElement);
     }
-    else if(!response.ok){
+    else if(response.ok && target == "classification"){
+        location.reload();
+    }
+    else{
         alert(`Oh no! something went wrong updating ${target}'s visibility`);
     }
-};
+}
 
 function checkboxEventHandler(checkbox){
     let target = checkbox.name;
@@ -106,7 +110,6 @@ function checkboxEventHandler(checkbox){
 }
 
 function buildInventoryList(data){
-
     const inventoryTable = document.getElementById("inventoryDisplay");
     //set up table labels
     let dataTable = "<thead>";

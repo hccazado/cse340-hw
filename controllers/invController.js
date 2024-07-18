@@ -223,6 +223,7 @@ invCont.buildEditInventory = async (req, res, next) =>{
         inv_price: itemData[0].inv_price,
         inv_miles: itemData[0].inv_miles,
         inv_color: itemData[0].inv_color,
+        inv_isvisible: itemData[0].inv_isvisible,
         classification_id: itemData[0].classification_id
     });
 }
@@ -233,6 +234,8 @@ invCont.buildEditInventory = async (req, res, next) =>{
 invCont.updateInventory = async (req, res, next) =>{
     const {inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_isvisible, classification_id} = req.body;
     const modelResult = await invModel.updateVehicle(inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_isvisible, classification_id);
+
+    console.log(inv_isvisible)
 
     if (modelResult){
         req.flash("success", `Vehicle ${inv_model} was successfully updated.`);
@@ -308,9 +311,8 @@ invCont.updateClassificationVisibility = async (req, res, next)=>{
     const {classification_id, classification_isvisible} = req.body;
     const modelResult = await invModel.updateClassificationVisibilityStatus(classification_id, classification_isvisible);
     
-    if(modelResult.classification_id ){
-        req.flash("success", "Inventory visibility updated!");
-        return res.redirect(200, "/inv/");
+    if(modelResult.classification_id){
+        return res.status(200).json({message:"Classification visibility updated!"});
     }
     else{
         return res.status(500).json({message:"Something went wrong! Classification visibility not changed"});

@@ -11,33 +11,41 @@
 <!--Displaying JS messages-->
 <div id="jsOutput">
 </div>
-
-<a href ="/inv/newclassification"><p>Add New Classification</p></a>
-
-<a href="/inv/newvehicle"><p>Add New Vehicle</p></a>
-
-<h2>Classification & Inventory Management</h2>
-
-<div class="tab">
-    <button class="tab" onclick="opentab('inventory')">Inventory</button>
-    <button class="tab" onclick="opentab('classification')">Classification</button>
-</div>
-
-<div id="inventory" class="tabcontent">
-    <h3>Inventory Management</h3>
-
-    <p>Select a classification to manage</p>
+<section>
+    <h2>Add Classification or Inventory</h2>
+    <hr>
+    <a class="button" href ="/inv/newclassification">Add New Classification</a>
     
-    <%- classificationSelect %>
+    <a class="button" href="/inv/newvehicle">Add New Vehicle</a>
+</section>
+
+<section>
+    <h2>Manage Classification & Inventory</h2>
+    <hr>
+    <div class="tab">
+        <button class="button tab" onclick="opentab('inventory')">Manage Inventory</button>
+        <button class="button tab" onclick="opentab('classification')">Manage Classification</button>
+    </div>
     
-    <table id="inventoryDisplay"></table>
-</div>
+    <section id="inventory" class="tabcontent">
+        <h3>Inventory Management</h3>
+        <hr>
+    
+        <p>Select a classification to manage</p>
+        
+        <%- classificationSelect %>
+        
+        <table id="inventoryDisplay"></table>
+    </section>
+    
+    <section id="classification" class="tabcontent">
+        <h3>Classification Management</h3>
+        <hr>
+        <%- classificationTable %>
+    </section>
+</section>
 
-<div id="classification" class="tabcontent">
-    <h3>Classification Management</h3>
 
-    <%- classificationTable %>
-</div>
 
 <noscript>JavaScript must be enabled to use this page.</noscript>
 
