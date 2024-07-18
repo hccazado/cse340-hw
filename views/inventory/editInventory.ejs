@@ -53,6 +53,10 @@
     <label for="inv_color">Color:*</label>
     <input  type="text" id="inv_color" name="inv_color" required title="input vehicle's color" value="<%=locals.inv_color%>"> 
     
+    <label for="inv_isvisible">Inventory is visible:</label>
+    <input type="checkbox" id="inv_isvisible" title="turns the visibility of the inventory" <%locals.inv_isvisible?=> "checked" : "unchecked"%>>
+    <!--<input type="checkbox" id="inv_isvisible" title="turns the visibility of the inventory" <%if(locals.inv_isvisible)=>"checked"%>>-->
+
     <input type="hidden" name="inv_id" <% if(locals.inv_id){ %>
         value="<%=locals.inv_id%>"
         <% } %>>

@@ -39,6 +39,9 @@ router.get("/detail/:vehicleId", invController.buildDetailsByInventoryId);
 //Route to return inventory list based on id_classification
 router.get("/getinventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
+//Route to return JSON classification list
+router.get("getclassification", utilities.handleErrors(invController.getClassificationJSON));
+
 //Route to get the edit view of an inventory item
 router.get("/edit/:inventory_id", utilities.authorizedAccounts, utilities.handleErrors(invController.buildEditInventory));
 
@@ -51,6 +54,12 @@ router.post("/update/",
 
 //Route to display confirmation before deleting of an inventory item
 router.get("/delete/:inventory_id", utilities.authorizedAccounts, utilities.handleErrors(invController.buildDeleteInventory));
+
+//Route to change visibility inventory visibility status
+router.post("/inventoryvisibility", utilities.authorizedAccounts, utilities.handleErrors(invController.updateInventoryVisibility));
+
+//Route to change visibility inventory visibility status
+router.post("/classificationvisibility", utilities.authorizedAccounts, utilities.handleErrors(invController.updateClassificationVisibility));
 
 //Route to delete an inventory item
 router.post("/delete", utilities.authorizedAccounts, utilities.handleErrors(invController.deleteInventory))

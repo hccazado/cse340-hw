@@ -313,11 +313,35 @@ form span{
   margin-top: .2rem;
 }
 
-#inventoryDisplay{
+.message{
+  border: 1px solid #11b;
+  background-color: rgba(10, 10, 129, 0.1);
+  padding: .1rem;
+  width: 100%;
+}
+
+#inventoryDisplay, 
+#classificationDisplay{
   margin-top: 1rem;
 }
-#inventoryDisplay tbody tr:nth-child(odd){
+
+#inventoryDisplay tbody tr:nth-child(odd),
+#classificationDisplay tbody tr:nth-child(odd){
   background-color: #ddd;
+}
+
+#inventoryDisplay td, 
+#classificationDisplay td{
+  padding: .3rem;
+}
+
+.tabcontent{
+  display: none;
+  
+}
+
+table td{
+  padding: .3rem;
 }
 @media screen and (min-width: 500px) {
   body{

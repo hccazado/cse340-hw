@@ -12,10 +12,12 @@ Util.getNav = async function(req, res, next){
     let list = "<ul>";
     list += '<li><a href="/" title="Home page">Home</a></li>';
     data.rows.forEach((row) =>{
-        list += "<li>";
-        list += '<a href=/inv/type/' + row.classification_id + ' title="See our inventory of '+ row.classification_name +
-        ' vehicles">'+ row.classification_name + "</a>"
-        list += "</li>";
+        if (row.classification_isvisible){
+            list += "<li>";
+            list += '<a href=/inv/type/' + row.classification_id + ' title="See our inventory of '+ row.classification_name +
+            ' vehicles">'+ row.classification_name + "</a>"
+            list += "</li>";
+        }
     });
     list += "</ul>";
     return list;
@@ -29,21 +31,24 @@ Util.buildClassificationGrid = async function(data){
     if(data || data.length > 0){
         grid = '<ul id="inv-display">';
         data.forEach(vehicle =>{
-            grid += `
-                <li>
-                    <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model}"> 
-                        <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors">
-                    </a>
-                    <div class="namePrice">
-                        <hr>
-                        <h2>
-                            <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
-                                ${vehicle.inv_make} ${vehicle.inv_model}
-                            </a>
-                        </h2>
-                        <span>$${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</span>
-                    </div>
-                </li>`
+            //verifying inventory visibility status
+            if(vehicle.inv_isvisible){
+                grid += `
+                    <li>
+                        <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model}"> 
+                            <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors">
+                        </a>
+                        <div class="namePrice">
+                            <hr>
+                            <h2>
+                                <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+                                    ${vehicle.inv_make} ${vehicle.inv_model}
+                                </a>
+                            </h2>
+                            <span>$${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</span>
+                        </div>
+                    </li>`
+            }
         });
         grid += '</ul>';
     }
@@ -179,6 +184,29 @@ Util.authorizedAccounts = (req, res, next) =>{
     else{
         res.status(401).redirect("/account/login");
     }
+}
+
+/**
+ * Build classifications table to inventory management view
+ */
+Util.buildClassificationTable = async ()=>{
+    let data = await invModel.getClassifications();
+    //set up table labels
+    let dataTable = `
+        <table id="classificationDisplay">    
+        <thead>
+        <tr><th>Classification name</th><td>&nbsp;</td></tr>
+        </thead>
+        <tbody>`;
+    
+    //iterating all classifications in the array and insert into a new row
+    data.rows.forEach((item)=>{
+        dataTable += `<tr><td>${item.classification_name}</td>`
+        dataTable += `<td> <label>Is Visible: <input type="checkbox" name="classification" onchange="checkboxEventHandler(this);" id=${item.classification_id} title="check to turn inventory visibility" ${item.classification_isvisible ? "checked":"unchecked"}></label></td></tr>`
+    });
+    dataTable += "</tbody></table>"
+
+    return dataTable;
 }
 
 
