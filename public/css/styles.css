@@ -25,9 +25,15 @@ a, div, table, span, button{
   font-weight: 300;
 }
 
+footer{
+  margin-top: 2rem;
+  border-top: 1px solid #ccc;
+
+}
+
 #top-header{
   display: grid;
-  grid-template-columns: 1fr .5fr;
+  grid-template-columns: 90px 1fr .5fr;
   font-size: 1.2rem;
 }
 
@@ -37,9 +43,10 @@ a, div, table, span, button{
 }
 
 .siteName{
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   width: 200px;
+  align-self: center;
 }
 
 #tools{
@@ -393,10 +400,18 @@ table td{
 
 .button{
   background-color: #eee;
-  color: #111;
-  padding: .5rem;
   border: 1px solid #111;
+  color: #111;
+  font-size: 1rem;
+  padding: .5rem;
   text-decoration: none;
+}
+
+section{
+  margin-top: 2rem;
+}
+section h2{
+  margin-top: .5rem;
 }
 @media screen and (min-width: 500px) {
   body{

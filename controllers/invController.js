@@ -98,6 +98,7 @@ invCont.buildAddNewVehicleView = async (req, res, next)=>{
 
 /* ***************************
  *  Add Classification
+ *  all new classifications are created with not visible status and should be enabled on inventory management section.
  * ************************** */
 invCont.addNewClassification = async (req, res, next)=>{
     const {classification_name} = req.body;
@@ -105,15 +106,8 @@ invCont.addNewClassification = async (req, res, next)=>{
     const modelResult = await invModel.addClassification(classification_name);
 
     if (modelResult){
-        let nav = await utilities.getNav();
-        let tools = utilities.getTools(req);
         req.flash("success", `Classification ${classification_name} was successfully added.`);
-        res.status(201).render("inventory/management",{
-            nav,
-            tools,
-            title: "Inventory Management",
-            errors: null
-        });
+        res.status(201).redirect("/inv/");
     }
     else{
         let nav = await utilities.getNav();
@@ -135,16 +129,12 @@ invCont.addNewClassification = async (req, res, next)=>{
 invCont.addNewVehicle = async (req, res, next)=>{
     const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id} = req.body;
     const modelResult = await invModel.addVehicle(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
-
     if (modelResult){
+        let classificationList = await utilities.buildClassificationList();
         let nav = await utilities.getNav();
         let tools = utilities.getTools(req);
         req.flash("success", `Vehicle ${inv_model} was successfully added.`);
-        res.status(201).render("inventory/management",{
-            nav,
-            tools,
-            title: "Inventory Management",
-        });
+        res.status(201).redirect("/inv/");
     }
     else{
         let nav = await utilities.getNav();
@@ -239,7 +229,7 @@ invCont.updateInventory = async (req, res, next) =>{
 
     if (modelResult){
         req.flash("success", `Vehicle ${inv_model} was successfully updated.`);
-        res.redirect("/inv/");
+        res.status(201).redirect("/inv/");
     }
     else{
         let nav = await utilities.getNav();

@@ -238,6 +238,7 @@ validate.checkUpdatePassword = async (req, res, next) =>{
         let nav = await utilities.getNav();
         let tools = utilities.getTools(req);
         const cookieData = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
+        console.log(cookieData)
         res.render("account/management",{
             errors,
             title: "Account Management",

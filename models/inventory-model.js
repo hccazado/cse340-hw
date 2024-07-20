@@ -43,7 +43,7 @@ async function getInventoryDetailsById(inventory_id){
 async function addClassification (classification_name){
     try{
         const sql = await pool.query(
-            `INSERT INTO public.classification (classification_name, classification_ishidden) VALUES ($1, $2) RETURNING *`,
+            `INSERT INTO public.classification (classification_name, classification_isvisible) VALUES ($1, $2) RETURNING *`,
             [classification_name, false]
         );
         return sql.rows;
