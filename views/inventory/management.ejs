@@ -8,17 +8,47 @@
 <!--Displaying messages (flash) in the view-->
 <%- messages() %>
 
-<a href ="/inv/newclassification"><p>Add New Classification</p></a>
+<!--Displaying JS messages-->
+<div id="jsOutput">
+</div>
+<section>
+    <hr>
+    <h2>Add Classification or Inventory</h2>
+    <div class="tab">
 
-<a href="/inv/newvehicle"><p>Add New Vehicle</p></a>
+        <a class="button" href ="/inv/newclassification">Add New Classification</a>
+        
+        <a class="button" href="/inv/newvehicle">Add New Vehicle</a>
+    </div>
+</section>
 
-<h2>Manage Inventory</h2>
+<section>
+    <hr>
+    <h2>Manage Classification & Inventory</h2>
+    <div class="tab">
+        <button class="button tab" onclick="opentab('inventory')">Manage Inventory</button>
+        <button class="button tab" onclick="opentab('classification')">Manage Classification</button>
+    </div>
+    
+    <section id="inventory" class="tabcontent">
+        <h3>Inventory Management</h3>
+        <hr>
+    
+        <p>Select a classification to manage</p>
+        
+        <%- classificationSelect %>
+        
+        <table id="inventoryDisplay"></table>
+    </section>
+    
+    <section id="classification" class="tabcontent">
+        <h3>Classification Management</h3>
+        <hr>
+        <%- classificationTable %>
+    </section>
+</section>
 
-<p>Select a classification to manage</p>
 
-<%- classificationSelect %>
-
-<table id="inventoryDisplay"></table>
 
 <noscript>JavaScript must be enabled to use this page.</noscript>
 

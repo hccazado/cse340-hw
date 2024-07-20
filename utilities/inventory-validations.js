@@ -157,7 +157,7 @@ validate.checkVehicleData = async (req, res, next) =>{
  * Check data and return errors or continue to add vehicle
  * ***************************** */
 validate.checkVehicleUpdateData = async (req, res, next) =>{
-    const {inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_miles, inv_color, inv_price, classification_id} = req.body;
+    const {inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_miles, inv_color, inv_price, inv_isvisible, classification_id} = req.body;
     let errors = [];
     errors = validationResult(req);
     if(!errors.isEmpty()){
@@ -179,7 +179,8 @@ validate.checkVehicleUpdateData = async (req, res, next) =>{
             inv_thumbnail,
             inv_price, 
             inv_miles, 
-            inv_color, 
+            inv_color,
+            inv_isvisible, 
             classificationList
         });
         return;

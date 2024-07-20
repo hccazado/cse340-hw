@@ -40,7 +40,7 @@
 </section>
 
 <section>
-    <h3>Edit Password</h3>
+    <h2>Edit Password</h2>
     <form action="/account/updatePassword" method="post">
     <label for="account_password">Password:*</label>
         <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
@@ -52,7 +52,9 @@
 </section>
 
     <% if(cookieData.account_type == 'Employee' || cookieData.account_type == 'Admin'){ %>
-        <h3>Manage Inventory</h3>
-        <a href="/inv/" title="Go to inventory management page">Inventory Management</a>
+        <section>
+            <h2>Manage Inventory</h2>
+            <a class="button" href="/inv/" title="Go to inventory management page">Inventory Management</a>
+        </section>
     <%}%>
 <script src="/js/script.js"></script>

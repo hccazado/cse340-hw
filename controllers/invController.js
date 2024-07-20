@@ -56,11 +56,13 @@ invCont.buildManagementView = async (req, res, next)=>{
     let nav = await utilities.getNav();
     let tools = utilities.getTools(req);
     let classificationSelect = await utilities.buildClassificationList();
+    let classificationTable = await utilities.buildClassificationTable();
     res.render("./inventory/management",{
+        title: "Inventory Management",
         nav,
         tools,
         classificationSelect,
-        title: "Inventory Management"
+        classificationTable
     });
 }
 
@@ -96,6 +98,7 @@ invCont.buildAddNewVehicleView = async (req, res, next)=>{
 
 /* ***************************
  *  Add Classification
+ *  all new classifications are created with not visible status and should be enabled on inventory management section.
  * ************************** */
 invCont.addNewClassification = async (req, res, next)=>{
     const {classification_name} = req.body;
@@ -103,15 +106,8 @@ invCont.addNewClassification = async (req, res, next)=>{
     const modelResult = await invModel.addClassification(classification_name);
 
     if (modelResult){
-        let nav = await utilities.getNav();
-        let tools = utilities.getTools(req);
         req.flash("success", `Classification ${classification_name} was successfully added.`);
-        res.status(201).render("inventory/management",{
-            nav,
-            tools,
-            title: "Inventory Management",
-            errors: null
-        });
+        res.status(201).redirect("/inv/");
     }
     else{
         let nav = await utilities.getNav();
@@ -133,16 +129,12 @@ invCont.addNewClassification = async (req, res, next)=>{
 invCont.addNewVehicle = async (req, res, next)=>{
     const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id} = req.body;
     const modelResult = await invModel.addVehicle(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
-
     if (modelResult){
+        let classificationList = await utilities.buildClassificationList();
         let nav = await utilities.getNav();
         let tools = utilities.getTools(req);
         req.flash("success", `Vehicle ${inv_model} was successfully added.`);
-        res.status(201).render("inventory/management",{
-            nav,
-            tools,
-            title: "Inventory Management",
-        });
+        res.status(201).redirect("/inv/");
     }
     else{
         let nav = await utilities.getNav();
@@ -183,6 +175,19 @@ invCont.getInventoryJSON = async (req, res, next) =>{
 }
 
 /* ***************************
+ *  Return Classifications As JSON
+ * ************************** */
+invCont.getClassificationJSON = async (req, res, next) =>{
+    const classData = await invModel.getClassifications();
+    if(classData[0].inv_id){
+        return res.json(classData);
+    }
+    else{
+        next(new Error("No data returned"));
+    }
+}
+
+/* ***************************
  *  Build edit inventory view
  * ************************** */
 invCont.buildEditInventory = async (req, res, next) =>{
@@ -208,6 +213,7 @@ invCont.buildEditInventory = async (req, res, next) =>{
         inv_price: itemData[0].inv_price,
         inv_miles: itemData[0].inv_miles,
         inv_color: itemData[0].inv_color,
+        inv_isvisible: itemData[0].inv_isvisible,
         classification_id: itemData[0].classification_id
     });
 }
@@ -216,12 +222,14 @@ invCont.buildEditInventory = async (req, res, next) =>{
  *  Update edited inventory
  * ************************** */
 invCont.updateInventory = async (req, res, next) =>{
-    const {inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id} = req.body;
-    const modelResult = await invModel.updateVehicle(inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
+    const {inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_isvisible, classification_id} = req.body;
+    const modelResult = await invModel.updateVehicle(inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, inv_isvisible, classification_id);
+
+    console.log(inv_isvisible)
 
     if (modelResult){
         req.flash("success", `Vehicle ${inv_model} was successfully updated.`);
-        res.redirect("/inv/");
+        res.status(201).redirect("/inv/");
     }
     else{
         let nav = await utilities.getNav();
@@ -242,7 +250,8 @@ invCont.updateInventory = async (req, res, next) =>{
             inv_thumbnail, 
             inv_price,
             inv_miles, 
-            inv_color, 
+            inv_color,
+            inv_isvisible, 
             classificationList
         })
     }
@@ -269,6 +278,37 @@ invCont.buildDeleteInventory = async (req, res, next) =>{
         inv_price: itemData[0].inv_price
     });
 }
+
+/* ***************************
+ *  Update inventory visibility
+ * ************************** */
+invCont.updateInventoryVisibility = async (req, res, next)=>{
+    const {inv_id, inv_isvisible} = req.body;
+    const modelResult = await invModel.updateVehicleVisibilityStatus(inv_id, inv_isvisible);
+
+    if (modelResult.inv_id){
+        return res.status(200).send("Inventory visibility updated!");
+    }
+    else{
+        return res.status(500).json({message:"Something went wrong! Inventory visibility not changed"});
+    }
+}
+
+/* ***************************
+ *  Update classification visibility
+ * ************************** */
+invCont.updateClassificationVisibility = async (req, res, next)=>{
+    const {classification_id, classification_isvisible} = req.body;
+    const modelResult = await invModel.updateClassificationVisibilityStatus(classification_id, classification_isvisible);
+    
+    if(modelResult.classification_id){
+        return res.status(200).json({message:"Classification visibility updated!"});
+    }
+    else{
+        return res.status(500).json({message:"Something went wrong! Classification visibility not changed"});
+    }
+}
+
 
 /* ***************************
  *  Delete an inventory item

@@ -20,39 +20,58 @@ body{
   font-weight: 300;
 }
 
+a, div, table, span, button{
+  font-family: "Roboto Slab", serif;
+  font-weight: 300;
+}
+
+footer{
+  margin-top: 2rem;
+  border-top: 1px solid #ccc;
+
+}
+
 #top-header{
   display: grid;
-  grid-template-columns: 1fr .5fr;
+  grid-template-columns: 90px 1fr .5fr;
   font-size: 1.2rem;
 }
+
 #top-header a{
   color: #2D2D34;
   text-decoration: none;
 }
+
 .siteName{
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   width: 200px;
+  align-self: center;
 }
+
 #tools{
   display: flex;
   flex-direction: column;
   align-items: center;
   border-left: 1px solid #ddd;
 }
+
 #tools p{
   margin: .3rem;
   font-size: 1rem;
 }
+
 #tools a{
   font-size: .9rem;
   margin: .3rem;
   text-decoration: underline;
 }
+
 #wrapper{
   background-color: #fff;
   padding: 1rem;
 }
+
 nav ul{
   display: flex;
   flex-direction: row;
@@ -62,9 +81,11 @@ nav ul{
   padding-inline-start: 0;
   max-width: 100%;
 }
+
 nav ul li{
   flex: 1 1 100%;
 }
+
 nav ul li a{
   display: block;
   font-weight: 400;
@@ -73,6 +94,7 @@ nav ul li a{
   color: #E2DCDE;
   text-decoration: none;
 }
+
 nav ul li a:hover{
   background-color: #E2DCDE; 
   color: #2D2D34;
@@ -98,25 +120,30 @@ nav ul li a:hover{
   padding: 1rem;
   font-weight: 500;
 }
+
 .call-action h2{
   margin: 0;
   font-size: 1.5rem;
 }
+
 .call-action p{
   margin-block: .3rem;
   font-size: 1.2rem;
 }
+
 .call-action button{
   background-color: #B97375;
   border: none;
   padding: .5rem;
   font-weight: 600;
 }
+
 .about{
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
 }
+
 .upgrades-container{
   width: 350px;
   display: flex;
@@ -126,6 +153,7 @@ nav ul li a:hover{
   justify-content: center;
   margin: 2rem auto;
 }
+
 .upgrades-container a{
   width: 48%;
   height: 110px;
@@ -135,16 +163,20 @@ nav ul li a:hover{
   padding: .2rem;
   font-weight: 400;
 }
+
 .upgrades-container p{
   margin-top: .5rem;
 }
+
 .upgrades-container img{
   height: 65px;
   width: auto;
 }
+
 .upgrades-container p{
   margin-inline-end: 0;
 }
+
 .reviews ul{
   display: flex;
   flex-direction: column;
@@ -161,6 +193,7 @@ nav ul li a:hover{
   gap: 1rem;
   padding-inline-start: 0;
 }
+
 #inv-display li{
   width: 100%;
   height: auto;
@@ -168,28 +201,34 @@ nav ul li a:hover{
   border: 2px solid #B97375;
   text-align: center;
 }
+
 #inv-display img{
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   width: 100%;
   height: auto;
 }
+
 .namePrice{
   width: 100%;
 }
+
 .namePrice h2{
   font-size: 1.3rem;
   text-align: center;
   margin-top: 0;
 }
+
 .namePrice hr{
   height: 3px;
   background-color: #2D2D34;
   border: none;
 }
+
 #inv-display a:hover{
   text-decoration: underline;
 }
+
 .namePrice a{
   color: #2D2D34;
   text-decoration: none;
@@ -211,13 +250,16 @@ nav ul li a:hover{
   width: 100%;
   height: auto;
 }
+
 .inv-detail-img{
   width: 100%;
   height: auto;
 }
+
 .inv-detail-desc p{
   padding: .5rem;
 }
+
 .inv-detail-desc p:nth-child(odd){
   background-color: rgba(185, 115, 117, .1);
 }
@@ -230,6 +272,7 @@ form{
   margin: 2rem auto;
   border-radius: 2%;
 }
+
 form input,
 form label,
 form textarea,
@@ -291,6 +334,18 @@ form span{
   width: 95%;
 }
 
+form fieldset {
+  margin-top: 1.2rem;
+}
+
+form fieldset label,
+form fieldset input[type="radio"]{
+  display: inline;
+  width: auto;
+  font-size: 1rem;
+  height: 1rem;
+}
+
 .notice, 
 .success{
   list-style: none;
@@ -313,62 +368,114 @@ form span{
   margin-top: .2rem;
 }
 
-#inventoryDisplay{
+.message{
+  border: 1px solid #11b;
+  background-color: rgba(10, 10, 129, 0.1);
+  padding: .1rem;
+  width: 100%;
+}
+
+#inventoryDisplay, 
+#classificationDisplay{
   margin-top: 1rem;
 }
-#inventoryDisplay tbody tr:nth-child(odd){
+
+#inventoryDisplay tbody tr:nth-child(odd),
+#classificationDisplay tbody tr:nth-child(odd){
   background-color: #ddd;
+}
+
+#inventoryDisplay td, 
+#classificationDisplay td{
+  padding: .3rem;
+}
+
+.tabcontent{
+  display: none; 
+}
+
+table td{
+  padding: .3rem;
+}
+
+.button{
+  background-color: #eee;
+  border: 1px solid #111;
+  color: #111;
+  font-size: 1rem;
+  padding: .5rem;
+  text-decoration: none;
+}
+
+section{
+  margin-top: 2rem;
+}
+section h2{
+  margin-top: .5rem;
 }
 @media screen and (min-width: 500px) {
   body{
     background-image: url("/images/site/checkerboard.jpg");
     background-repeat: repeat;
   }
+
   #wrapper{
     border: 5px solid #B97375;
     border-radius: 8px;
     margin: 1rem 0;
   }
+
   #tools{
     flex-direction: row;
   }
+
   #tools p{
     font-size: .9rem;
   }
+
   #tools a{
     font-size: .8rem;
   }
+
   nav ul{
     flex-wrap: nowrap;
   }
+
   .hero{
     display: flex;
   }
+
   .hero img{
     height: auto;
     margin: 0 auto;
     width: 80%;
   }
+
   .about{
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
   .upgrades-container a{
     width: 150px;
     height: 120px;
   }
+
   .upgrades-container{
     flex-direction: row;
   }
+
   #inv-display{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
+
   #inv-display li{
     width: 250px;
     min-height: 280px;
   }
+
   #inv-display img{
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
@@ -376,15 +483,18 @@ form span{
     height: 170px;
     object-fit: contain;
   }
+
   .inv-detail{
     flex-direction: row;
     align-items: start;
     gap: 1rem;
   }
+
   .inv-detail-img{
     width: 400px;
     height: auto;
   }
+
   .inv-detail-desc h2{
     margin-top: 0;
   }
