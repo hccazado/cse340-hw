@@ -71,7 +71,7 @@ async function updateVisibility(id, isvisible, target){
         body: body
     });
 
-    document.alert("Please wait, updating visibility!");
+    alert("Please wait, updating visibility!");
 
     if (response.ok && target == "inventory"){
         
